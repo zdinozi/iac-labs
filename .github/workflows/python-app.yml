@@ -15,7 +15,11 @@ permissions:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ "ubuntu-latest", "windows-latest" ]
 
     defaults:
       run:
@@ -48,7 +52,11 @@ jobs:
         key: ${{ runner.os }}-venv
   lint: 
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ "ubuntu-latest", "windows-latest" ]
 
     defaults:
       run:
@@ -73,7 +81,11 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
   formatter:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ "ubuntu-latest", "windows-latest" ]
 
     defaults:
       run:
@@ -95,7 +107,11 @@ jobs:
       run: black .
   security:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ "ubuntu-latest", "windows-latest" ]
 
     defaults:
       run:
@@ -118,7 +134,11 @@ jobs:
           safety check || true
   unittests:
     needs: [security, lint, formatter]
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ "ubuntu-latest", "windows-latest" ]
 
     defaults:
       run:
