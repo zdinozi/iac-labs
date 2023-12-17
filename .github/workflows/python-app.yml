@@ -123,8 +123,6 @@ jobs:
     defaults:
       run:
         working-directory: ./example-app
-    concurrency:
-      group: conc3
     steps:
     - name: Cache build venv
       id: cached-poetry-dependencies
