@@ -79,7 +79,7 @@ jobs:
       run:
         working-directory: ./example-app
     concurrency:
-      group: conc1
+      group: conc2
     steps:
     - name: Cache build venv
       id: cached-poetry-dependencies
@@ -93,3 +93,25 @@ jobs:
         pip install black
     - name: Code Formatting
       run: black .
+security:
+    needs: build
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./example-app
+    concurrency:
+      group: conc1
+    steps:
+    - name: Cache build venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: /home/runner/work/<path>/example-app/.venv
+        key: ${{ runner.os }}-venv
+    - uses: actions/checkout@v3
+    - name: Install Dependencies
+      run: |
+        pip install bandit
+    - name: Security Check
+      run: bandit -r .
