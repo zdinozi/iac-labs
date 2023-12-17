@@ -114,4 +114,4 @@ jobs:
       run: |
         pip install bandit
     - name: Security Check
-      run: bandit -r .
+      run: bandit -r . --configfile .bandit.yml
