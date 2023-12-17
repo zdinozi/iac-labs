@@ -118,7 +118,7 @@ jobs:
           safety check || true
   unittests:
     needs: [security, lint, formatter]
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     defaults:
       run:
