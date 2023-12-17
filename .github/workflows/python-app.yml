@@ -93,7 +93,7 @@ jobs:
         pip install black
     - name: Code Formatting
       run: black .
-security:
+  security:
     needs: build
     runs-on: ubuntu-latest
 
