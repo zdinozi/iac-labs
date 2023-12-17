@@ -112,7 +112,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install Dependencies
       run: |
-        pip install bandit
+        pip install safety
     - name: Security Check
       run: |
-          bandit -r .  
+          safety check  
